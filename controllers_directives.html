@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
+    <script type='text/javascript'>
+       var myApp = angular.module('app', []);
+       myApp.controller('foodsController',['$scope', function($scope) {
+         $scope.foods = ["Pizza","BBQ","Fries","Salad","Steak"];
+         $scope.addFood = function() {
+           $scope.foods.push($scope.food);
+           $scope.food="";
+         }
+       }]);
+    </script>
+    <title>Controllers and dierctives</title>
+  </head>
+  <body>
+    <div ng-controller="foodsController">
+    <form method="post" ng-submit="addFood()">
+      <label>Favorite Food</label>
+      <input type="text" name="" placeholder="Write your food" ng-model='food'>
+      <input  type='submit' value="Add Food">
+    </form>
+    <span style="width:200px;">Currently typing: {{model}}</span>
+    <input type="text" name="" value="filter.." ng-model='searchText'>
+    <ul style="margin-left:220px;">
+    <li ng-repeat='food in foods track by $index | filter:searchText'>{{food}}</li>
+  </ul>
+
+  </body>
+</html>

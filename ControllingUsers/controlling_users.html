@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
+    <script type="text/javascript">
+      const myApp = angular.module('app',[]);
+      myApp.controller('usersContoller',['$scope', function($scope) {
+        $scope.users =[
+          {first_name:'Dhurata', last_name:'Kamberi', fav_language:'Javascript'},
+          {first_name:'Yll', last_name:'Kamberi', fav_language:'Python'},
+          {first_name:'Dudu', last_name:'Kamberi', fav_language:'Java'},
+        ];
+        $scope.addUser = function() {
+          $scope.users.push($scope.user);
+          $scope.user = {};
+        }
+        $scope.deleteUser = function(index) {
+          $scope.users.splice(index,1);
+        }
+      }]);
+    </script>
+    <style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    </style>
+    <title>Users</title>
+  </head>
+  <body>
+    <div ng-controller="usersContoller">
+    <h2>Users Controller </h2>
+    <form ng-submit="addUser()">
+      <label>First Name: </label>
+      <input type="text" ng-model="user.first_name"> <br>
+      <label>Last Name: </label>
+      <input type="text" ng-model="user.last_name"> <br>
+      <label>Favourite language: </label>
+      <input type="text" ng-model="user.fav_language">
+      <input type="submit" value="Create User">
+    </form>
+    <br>
+    <hr>
+    <br>
+    Search Friends: <input type="text" ng-model="search_user">
+    <table>
+      <thead>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>Fav Language </td>
+        <td>Actions</td>
+      </thead>
+      <tbody ng-repeat="user in users | filter:search_user">
+        <tr>
+          <td>{{user.first_name}}</td>
+          <td>{{user.last_name}}</td>
+          <td>{{user.fav_language}}</td>
+          <td><button ng-click="deleteUser($index)">Delete user</button></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </body>
+</html>

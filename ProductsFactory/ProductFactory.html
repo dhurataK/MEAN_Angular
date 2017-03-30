@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
+    <script type="text/javascript">
+      const myApp = angular.module('app',[]);
+      myApp.controller('productsContoller',['$scope','productsFactory', function($scope, productsFactory) {
+
+        $scope.getProducts = function() {
+          productsFactory.getProducts(function(products){
+            $scope.products = products
+
+          });
+        }
+        $scope.addProduct = function() {
+          $scope.products.push($scope.product);
+          $scope.product = {};
+        }
+        $scope.deleteProduct = function(index) {
+          $scope.products.splice(index,1);
+        }
+        $scope.getProducts();
+      }]);
+      myApp.factory('productsFactory', function() {
+        var factory = {};
+        var products =[
+          {name:'Keyboard',price:'29.99$'},
+          {name:'Mouse',price:'5.99$'},
+          {name:'Book',price:'9.99$'}
+        ];
+        factory.getProducts = function(callback) {
+              callback(products);
+            }
+        return factory;
+      });
+    </script>
+    <title>Product Factory</title>
+  </head>
+  <body>
+    <div ng-controller="productsContoller">
+    <h2>Products Controller </h2>
+    <form ng-submit="addProduct()">
+      <label>Product Name: </label>
+      <input type="text" ng-model="product.name"> <br>
+      <label>Product Price: </label>
+      <input type="text" ng-model="product.price"> <br>
+      <input type="submit" value="Add Product">
+    </form>
+    <br>
+    <hr>
+    <br>
+    <table>
+      <thead>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Actions</td>
+      </thead>
+      <tbody>
+        <tr ng-repeat="product in products">
+          <td>{{product.name}}</td>
+          <td>{{product.price}}</td>
+          <td><button ng-click="deleteProduct($index)">Delete product</button></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </body>
+</html>

@@ -2,7 +2,7 @@
 <html ng-app='app'>
   <head>
     <meta charset="utf-8">
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="styles.css">
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js'></script>
     <script type="text/javascript">
       const myApp = angular.module('app',[]);
@@ -21,23 +21,6 @@
         }
       }]);
     </script>
-    <style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-    </style>
     <title>Users</title>
   </head>
   <body>
@@ -63,8 +46,8 @@
         <td>Fav Language </td>
         <td>Actions</td>
       </thead>
-      <tbody ng-repeat="user in users | filter:search_user">
-        <tr>
+      <tbody>
+        <tr ng-repeat="user in users  | filter:search_user">
           <td>{{user.first_name}}</td>
           <td>{{user.last_name}}</td>
           <td>{{user.fav_language}}</td>

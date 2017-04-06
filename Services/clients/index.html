@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular/angular.js"></script>
+    <script>
+      var myApp = angular.module('app',[]);
+      myApp.controller('productsController', ['$scope','productsFactory', function($scope, productsFactory) {
+        productsFactory.getProducts(function(products) {
+          $scope.products = products;
+          console.log("products in controller ",products);
+        });
+      }]);
+      myApp.factory('productsFactory', function($http) {
+        var factory = {};
+        factory.getProducts = function(callback) {
+          $http.get('/products').then(function(response) {
+            console.log(response);
+            factory.products = response.data;
+            callback(response.data);
+          }).catch(function(response) {
+            console.log("Error ",response);
+          })
+        }
+        factory.products =[];
+        return factory;
+      });
+    </script>
+    <title>Services</title>
+  </head>
+  <body>
+    <h1>Hello</h1>
+    <div ng-controller='productsController'>
+      <ul>
+        <li ng-repeat=' product in products'> {{product.name}}</li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<div ng-init='getPlayers()'>
+  <h1>Players</h1>
+  <form ng-submit="addPlayer()" method="post">
+    Name: <input type="text" name="newPlayer" ng-model="newPlayer.name">
+    <button type="submit">Add Player</button>
+  </form>
+   <fieldset><legend>Players</legend>
+  <table>
+    <thead>
+      <td>Name</td>
+      <td>Actions</td>
+    </thead>
+    <tbody>
+      <tr ng-repeat="player in players">
+        <td>{{player.name}}</td>
+        <td><button ng-click="removePlayer(player)">Remove Player</button></td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>
+</div>

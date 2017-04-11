@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title>Players and Teams</title>
+    <script src = 'angular/angular.js'></script>
+    <script src = 'angular-route/angular-route.js'></script>
+    <script src = 'application/app.js'></script>
+    <script src = 'application/controllers/playerController.js'></script>
+    <script src = 'application/controllers/associationsController.js'></script>
+    <script src = 'application/controllers/teamsController.js'></script>
+    <script src = 'application/factories/playerFactory.js'></script>
+    <script src = 'application/factories/teamFactory.js'></script>
+  </head>
+  <body>
+    <div ng-hide="true">
+      Angular is not working!!!
+    </div>
+    <a href="#!/players">Players</a> <a href="#!/teams">Teams</a> <a href="#!/associations"> Associations</a>
+    <ng-view></ng-view>
+  </body>
+</html>
